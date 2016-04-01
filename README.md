@@ -1,13 +1,13 @@
-# carrousel
+# slider-js
 
-![npm version](http://img.shields.io/npm/v/carrousel.svg)
-![ci status](https://api.travis-ci.org/amfe/carrousel.svg?branch=master)
+![npm version](http://img.shields.io/npm/v/slider-js.svg)
+![ci status](https://api.travis-ci.org/amfe/slider-js.svg?branch=master)
 
 project description
 
-## [Visiting Site](http://amfe.github.io/carrousel/)
+## [Visiting Site](http://amfe.github.io/slider-js/)
 
-## [Discuss & Issues](https://github.com/amfe/carrousel/issues)
+## [Discuss & Issues](https://github.com/amfe/slider-js/issues)
 
 ## License
 

@@ -1,7 +1,7 @@
 # The API
 
 ```javascript
-import Module from 'carrousel';
+import Module from 'slider-js';
 ```
 
 ## Constrcutor

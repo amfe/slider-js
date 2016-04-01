@@ -3,13 +3,13 @@
 ## Install
 
 ```shell
-tnpm install carrousel --save
+tnpm install slider-js --save
 ```
 
 ## Usage
 
 ```javascript
-import SomeModule from 'carrousel'
+import SomeModule from 'slider-js'
 ```
 
 ## Samples
