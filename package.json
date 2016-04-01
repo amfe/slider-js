@@ -35,6 +35,9 @@
     "site:publish": "sh ./build/site.sh publish"
   },
   "dependencies": {
+    "@ali/lib-animation": "^2.1.2",
+    "amfe-cubicbezier": "^2.0.0",
+    "gesturejs": "^0.1.0"
   },
   "devDependencies": {
     "babel-cli": "~6.4.5",

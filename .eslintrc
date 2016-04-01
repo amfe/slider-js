@@ -33,7 +33,7 @@
     "no-cond-assign": 1, // disallow assignment in conditional expressions
     "no-extra-boolean-cast": 1, // disallow double-negation boolean casts in a boolean context 
     /* Best Practices */
-    "accessor-pairs": [2, {"getWithoutSet": true}], // Enforces getter/setter pairs in objects
+    "accessor-pairs": [2, {"getWithoutSet": false}], // Enforces getter/setter pairs in objects
     "array-callback-return": 2, // Enforces return statements in callbacks of array's methods
     "block-scoped-var": 2, // treat var statements as if they were block scoped
     "curly": 2, // specify curly brace conventions for all control statements
