@@ -57,7 +57,7 @@
     "less": "^2.6.1",
     "less-loader": "^2.2.3",
     "mocha": "~2.4.5",
-    "serve": "~1.4.l0",
+    "serve": "~1.4.0",
     "style-loader": "^0.13.1",
     "watch-cli": "~0.2.1",
     "webpack": "^1.13.0"
