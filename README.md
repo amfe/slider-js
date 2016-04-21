@@ -3,7 +3,7 @@
 ![npm version](http://img.shields.io/npm/v/slider-js.svg)
 ![ci status](https://api.travis-ci.org/amfe/slider-js.svg?branch=master)
 
-project description
+A nice slider.
 
 ## [Visiting Site](http://amfe.github.io/slider-js/)
 

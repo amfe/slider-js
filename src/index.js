@@ -1,6 +1,6 @@
 import 'gesturejs';
-import cubicbezier from 'amfe-cubicbezier';
-import Animation from '@ali/lib-animation';
+import * as cubicbezier from 'amfe-cubicbezier';
+import Animation from 'animation-js';
 
 if (typeof global.window === 'undefined') {
     throw new Error('can not be running in non-browser');
@@ -12,10 +12,13 @@ const ua = win.navigator.userAgent;
 const Firefox = !!ua.match(/Firefox/i);
 const IEMobile = !!ua.match(/IEMobile/i);
 const stylePrefix = Firefox ? 'Moz' :
-                        IEMobile ? 'ms' : 'webkit';
+    IEMobile ? 'ms' : 'webkit';
 
 export function getTransformOffset(element) {
-    var offset = {x: 0, y: 0};
+    var offset = {
+        x: 0,
+        y: 0
+    };
     var transform = getComputedStyle(element)[`${stylePrefix}Transform`];
     var matched;
 
@@ -76,7 +79,7 @@ export class Items {
         let itemElement = document.createElement('li');
         if (typeof htmlElement === 'string') {
             itemElement.innerHTML = htmlElement;
-        } else if (htmlElement.length > 1){
+        } else if (htmlElement.length > 1) {
             for (const el of htmlElement) {
                 itemElement.appendChild(el);
             }
@@ -89,7 +92,7 @@ export class Items {
 
 
         itemElement.style.display = 'none';
-        itemElement.style.float = 'left';
+        itemElement.style.position = 'absolute';
         itemElement.index = this.length;
 
         if (itemElement.parentNode !== this.parentElement) {
@@ -107,7 +110,7 @@ export class Items {
         return itemElement;
     }
 
-    normalizeIndex(index) {
+    _normalizeIndex(index) {
         while (index < 0) {
             index += this.length;
         }
@@ -120,12 +123,12 @@ export class Items {
     }
 
     get(index) {
-        return this[String(this.normalizeIndex(index))];
+        return this[String(this._normalizeIndex(index))];
     }
 
-    getCloned(index) {
-        index = String(this.normalizeIndex(index));
-        let item = this.element.querySelector(`[cloned="cloned-${index}"]`);
+    _getCloned(index) {
+        index = String(this._normalizeIndex(index));
+        let item = this.parentElement.querySelector(`[cloned="cloned-${index}"]`);
 
         if (!item) {
             item = this[index].cloneNode(true);
@@ -137,7 +140,7 @@ export class Items {
         return item;
     }
 
-    activate(index) {
+    _activate(index) {
         if (this.length === 0) {
             return;
         }
@@ -150,17 +153,24 @@ export class Items {
             prevItem = this.get(index - 1);
 
             if (this.length === 2) {
-                nextItem = this.getCloned(index + 1);
+                nextItem = this._getCloned(index + 1);
+                fireEvent(this.parentRoot, 'clone', {
+                    item: this.get(index + 1),
+                    cloned: nextItem
+                });
             } else {
                 nextItem = this.get(index + 1);
             }
 
             curItem.style.left = `${-this.transformOffset}px`;
             prevItem.style.left = `${-this.transformOffset - this.step}px`;
+            prevItem.style.display = '';
             nextItem.style.left = `${-this.transformOffset + this.step}px`;
+            nextItem.style.display = '';
         }
 
         this.index = curItem.index;
+        curItem.style.display = '';
 
         fireEvent(this.parentRoot, 'change', {
             prevItem,
@@ -175,10 +185,10 @@ export class Items {
         }
 
         if (this.length === 1) {
-            this.index = 0;
+            index = 0;
         }
 
-        const startOffset = getTransformOffset(this.element).x;
+        const startOffset = getTransformOffset(this.parentElement).x;
         const endOffset = this.transformOffset + this.step * (-index);
         const interOffset = endOffset - startOffset;
 
@@ -187,13 +197,13 @@ export class Items {
         }
 
         const anim = new Animation(400, cubicbezier.ease, (i1, i2) => {
-            this.element.style[`${stylePrefix}Transform`] = getTranslate(startOffset + interOffset * i2, 0);
+            this.parentElement.style[`${stylePrefix}Transform`] = getTranslate(startOffset + interOffset * i2, 0);
         });
 
         return anim.play().then(() => {
             this.transformOffset = endOffset;
-            this.element.style[`${stylePrefix}Transform`] = getTranslate(endOffset, 0);
-            index && this.activate(this.index + index);
+            this.parentElement.style[`${stylePrefix}Transform`] = getTranslate(endOffset, 0);
+            index && this._activate(this.index + index);
         });
     }
 
@@ -268,7 +278,7 @@ export default class Slider {
         this.element.style[`${stylePrefix}Transform`] = getTranslate(0, 0);
 
         this.items = new Items({
-            parentRoot: root,
+            parentRoot: this.root,
             parentElement: this.element,
             step: this.options.step || this.element.getBoundingClientRect().width
         });
@@ -283,7 +293,7 @@ export default class Slider {
         if (this.options.useGesture) {
             this.element.addEventListener('panstart', e => {
                 if (!e.isVertical &&
-                        !(this._isPanning && this._isSliding)) {
+                    !(this._isPanning && this._isSliding)) {
                     e.preventDefault();
                     e.stopPropagation();
 
@@ -296,13 +306,13 @@ export default class Slider {
                 }
             });
 
-            this.element.addEventListener('pan', e => {
+            this.element.addEventListener('panmove', e => {
                 if (!e.isVertical && this._isPanning) {
                     e.preventDefault();
                     e.stopPropagation();
 
                     this._displacement = e.displacementX;
-                    this._element.style[`${stylePrefix}Transform`] =
+                    this.element.style[`${stylePrefix}Transform`] =
                         getTranslate(this.items.transformOffset + this._displacement, 0);
                 }
             });
@@ -350,7 +360,7 @@ export default class Slider {
 
         if (!this._isStarting) {
             this._isStarting = true;
-            return this.items.activate(0);
+            return this.items._activate(0);
         }
 
         if (this._isPlaying) {
@@ -367,6 +377,8 @@ export default class Slider {
         }
 
         this._isPlaying = setTimeout(playing, 400 + this.playInterval);
+
+        return this;
     }
 
     stop() {
@@ -379,13 +391,17 @@ export default class Slider {
         setTimeout(() => {
             this._isPlaying = false;
         }, 500);
+
+        return this;
     }
 
     addEventListener(name, handler) {
         this.root.addEventListener(name, handler, false);
+        return this;
     }
 
     removeEventListener(name, handler) {
         this.root.removeEventListener(name, handler, false);
+        return this;
     }
 }

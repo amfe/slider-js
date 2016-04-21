@@ -2,13 +2,117 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="flexible.js"></script>
 <script src="bundle.js"></script>
+<style>
+h2 {
+    font-size: 1rem;
+    text-align: center;
+    padding: 0.2rem 0;
+}
+
+.slider {
+    height: 3.125rem; 
+    width: 10rem; 
+    overflow: hidden; 
+    position: relative; 
+    margin:auto;
+}
+
+.slider > ul {
+    height: 100%;
+    padding: 0;
+}
+
+.slider > ul > li, 
+    .slider > ul > li img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
 </head>
 <body>
+<div class="slider">
+    <ul>
+        <li>
+            <img class="lazyimg" src="grey.gif" data-src="TB1S1CFGFXXXXaDXXXX7vBfZXXX-1125-352.jpeg">
+        </li>
+        <li>
+            <img class="lazyimg" src="grey.gif" data-src="TB1zt35GXXXXXbfXVXXSutbFXXX.jpg_q50.jpg">
+        </li>
+        <li>
+            <img class="lazyimg" src="grey.gif" data-src="T1BZP9FO8XXXb1upjX.jpg_q50.jpg">
+        </li>
+        <li>
+           <img class="lazyimg" src="grey.gif" data-src="TB1tmKhGFXXXXcdXVXXdIns_XXX-1125-352.jpg_q50.jpg">
+        </li>
+        <li>
+            <img class="lazyimg" src="grey.gif" data-src="TB1D.iEGFXXXXbcXFXXdIns_XXX-1125-352.jpg_q50.jpg">
+        </li>
+        <li>
+            <img class="lazyimg" src="grey.gif" data-src="TB1z.KDGFXXXXcrXXXXdIns_XXX-1125-352.jpg_q50.jpg">
+        </li>
+        <li>
+            <img class="lazyimg" src="grey.gif" data-src="TB1AbKEGFXXXXaEXpXXdIns_XXX-1125-352.jpg_q50.jpg">
+        </li>
+    </ul>
+</div>
+<h2>1张</h2>
+<div class="slider">
+    <ul>
+        <li>
+            <img class="lazyimg" src="grey.gif" data-src="TB1S1CFGFXXXXaDXXXX7vBfZXXX-1125-352.jpeg">
+        </li>
+    </ul>
+</div>
+<h2>2张</h2>
+<div class="slider">
+    <ul>
+        <li>
+            <img class="lazyimg" src="grey.gif" data-src="TB1S1CFGFXXXXaDXXXX7vBfZXXX-1125-352.jpeg">
+        </li>
+        <li>
+            <img class="lazyimg" src="grey.gif" data-src="TB1zt35GXXXXXbfXVXXSutbFXXX.jpg_q50.jpg">
+        </li>
+    </ul>
+</div>
 <script>
-var TestLib1 = require('slider-js');
-document.write('<h1>slider-js <b>' + TestLib1.version + '</b></h1>');
+document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+});
+
+var Slider = this['slider'].default;
+var sliderEls = document.querySelectorAll('.slider');
+Array.prototype.forEach.call(sliderEls, function(el) {
+    var ulEl = el.querySelector('ul');
+    var slider = new Slider(ulEl, {
+        autoplay: true,
+        useGesture: true
+    });
+
+    slider.addEventListener('change', function(e) {
+        var items = [e.curItem, e.nextItem, e.prevItem];
+
+        items.filter(function(item) {
+            return !!item;
+        }).map(function(item) {
+            return item.querySelector('.lazyimg');
+        }).filter(function(el){return !!el}).forEach(function(el) {
+            var dataSrc = el.getAttribute('data-src');
+
+            if (dataSrc) {
+                el.src = dataSrc;
+                el.removeAttribute('data-src');
+                el.className = el.className.split(' ')
+                    .filter(function (c) {
+                        return c !== 'lazyimg'
+                    }).join(' ');
+            }
+        });
+    });
+
+    slider.play();
+});
 </script>
 </body>
 </html>

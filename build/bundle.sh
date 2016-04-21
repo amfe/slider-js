@@ -9,5 +9,5 @@ main=`$packbin main`
 name=`$packbin name`
 
 echo "generate $samplesdir/bundle.js ..."
-browserify -r "./$main:$name" -t [babelify] --debug > "$samplesdir/bundle.js"
+browserify -r "$samplesdir/bundle.es6" --debug > "$samplesdir/bundle.js"
 echo "generate success"

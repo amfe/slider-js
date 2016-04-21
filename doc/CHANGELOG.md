@@ -1,9 +1,6 @@
 # Change Logs
 
-## v1.0.1
+## v0.1.0
 
-- bugfix
-
-## v1.0.0
-
-- initialize
+- A nice slider!
+- ES2015
