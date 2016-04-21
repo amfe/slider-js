@@ -27,7 +27,7 @@
     "bundle": "webpack --config webpack.config.js",
     "dev": "npm run build && npm run bundle",
     "watch": "watch -p \"src/**/*.js\" -c \"npm run dev\"",
-    "lint": "eslint --fix --config .eslintrc src/**/*.js test/**/*.js",
+    "lint": "eslint --fix --config .eslintrc src/*.js test/*.js",
     "test": "mocha --compilers js:babel-core/register test/*.js",
     "cover": "babel-node node_modules/isparta/bin/isparta cover --report text node_modules/mocha/bin/_mocha test/**/*.js --reporter dot",
     "ci": "npm run lint && npm run test",
