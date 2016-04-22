@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "amfe-cubicbezier": "^2.0.0",
-    "animation-js": "^0.1.0",
+    "animation-js": "^0.1.1",
     "gesturejs": "^0.1.0"
   },
   "devDependencies": {
