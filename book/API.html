@@ -1,0 +1,282 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>The API | slider-js</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.6.7">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="./CHANGELOG.html" />
+    
+    
+    <link rel="prev" href="./QuickStart.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book"
+        data-level="2"
+        data-chapter-title="The API"
+        data-filepath="API.md"
+        data-basepath="."
+        data-revision="Fri Apr 22 2016 13:29:53 GMT+0800 (CST)"
+        data-innerlanguage="">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="./index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        Overview
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="QuickStart.html">
+            
+                
+                    <a href="./QuickStart.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        Getting Started
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="2" data-path="API.html">
+            
+                
+                    <a href="./API.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        The API
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="CHANGELOG.html">
+            
+                
+                    <a href="./CHANGELOG.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        Change Logs
+                    </a>
+            
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="./" >slider-js</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="the-api">The API</h1>
+<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;slider-js/src/index_css.js&apos;</span>
+<span class="hljs-keyword">import</span> Slider <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;slider-js&apos;</span>
+</code></pre>
+<h2 id="constrcutor">Constrcutor</h2>
+<h3 id="new-sliderelement-options">new Slider(element, options)</h3>
+<p>create a slider</p>
+<pre><code class="lang-jsdoc">@param {HTMLElement} element - the root of slider.
+@param {object} options
+@param {number} [options.playInterval=1500(ms)] - the interval of auto-play, default is 1500ms.
+@param {number} [options.step(px)] - the step of width, default is the item&apos;s width.
+@param {boolean} [options.autoplay] - if can auto-slide after started.
+@param {boolean} [options.useGesture] - if can use gesture to slide.
+</code></pre>
+<h2 id="methods">Methods</h2>
+<h3 id="play">play()</h3>
+<p>start to play.</p>
+<pre><code class="lang-jsdoc">@return {Slider} the slider context
+</code></pre>
+<h3 id="stop">stop()</h3>
+<p>immediately stop.</p>
+<pre><code class="lang-jsdoc">@return {Slider} the slider context
+</code></pre>
+<h3 id="addeventlistenername-handler">addEventListener(name, handler)</h3>
+<p>listen an event, and fire with the handler.</p>
+<pre><code class="lang-jsdoc">@param {string} name - the event name
+@param {function} handler - the event handler
+@return {Slider} the slider context
+</code></pre>
+<h3 id="removeeventlistenername-handler">removeEventListener(name, handler)</h3>
+<p>remove the event listener.</p>
+<pre><code class="lang-jsdoc">@param {string} name - the event name
+@param {function} handler - the event handler
+@return {Slider} the slider context
+</code></pre>
+<h2 id="properties">Properties</h2>
+<h3 id="items">items</h3>
+<p>the items of the slider.</p>
+<pre><code class="lang-jsdoc">@var {Items}
+</code></pre>
+<p>the methods of items are:</p>
+<h4 id="addelement">add(element)</h4>
+<p>add a element to the slider items.</p>
+<pre><code class="lang-jsdoc">@param {HTMLElement} element - a element for item.
+</code></pre>
+<h4 id="getindex">get(index)</h4>
+<p>get the item indicated by index.</p>
+<pre><code class="lang-jsdoc">@param {number} index - start with 0.
+@return {HTMLElement} the item element.
+</code></pre>
+<h4 id="slideindex">slide(index)</h4>
+<p>slide to the item indicated by index.</p>
+<pre><code class="lang-jsdoc">@param {number} index - start with 0.
+</code></pre>
+<h4 id="next">next()</h4>
+<p>slide to the next item.</p>
+<h4 id="prev">prev()</h4>
+<p>slide to the previous item.</p>
+<h2 id="events">Events</h2>
+<h3 id="change">change</h3>
+<p>fire when the slider changed.</p>
+<p>the event params:</p>
+<pre><code class="lang-jsdoc">@param {HTMLElement} prevItem - the previous item.
+@param {HTMLElement} curItem - the current item.
+@param {HTMLElement} nextItem - the next item.
+</code></pre>
+<h3 id="clone">clone</h3>
+<p>fire when a item has been cloning.</p>
+<p>the event params:</p>
+<pre><code class="lang-jsdoc">@param {HTMLElement} item - the item that be cloning.
+@param {HTMLElement} cloned - the cloned item.
+</code></pre>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="./QuickStart.html" class="navigation navigation-prev " aria-label="Previous page: Getting Started"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="./CHANGELOG.html" class="navigation navigation-next " aria-label="Next page: Change Logs"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="gitbook/app.js"></script>
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>
